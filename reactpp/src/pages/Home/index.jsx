@@ -7,6 +7,7 @@ export function Home() {
 
   const [studentName, setStudentName] = useState();
   const [students, setStudents] = useState([]);
+  const [user, setUser] = useState({ name: '', avatar:''});
 
   function handleAddStudent(e) {
     const newStudent = {
@@ -22,7 +23,21 @@ export function Home() {
   }
 
 
-  useEffect(() => {},[]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://api.github.com/users/cnkumbula')
+      const data = await response.json();
+
+        setUser({
+          name: data.name,
+          avatar: data.avatar_url,
+        });
+      
+    }
+
+    fetchData();
+
+  },[]);
 
   return (
        
@@ -30,10 +45,10 @@ export function Home() {
       <header>
         <h1> Lista de Presenca.: </h1>
         <div>
-          <strong>Claudio Nkumbula</strong>
+          <strong>{ user.name }</strong>
           
           <img 
-            src="https://avatars.githubusercontent.com/u/25586893?v=4" 
+            src={user.avatar}
             alt="profile picture"
           />
 
