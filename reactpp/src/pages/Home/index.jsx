@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import './style.css';
 
 import { Card } from '../../components/Card';
@@ -22,12 +22,24 @@ export function Home() {
   }
 
 
-
+  useEffect(() => {},[]);
 
   return (
        
     <div className='container'>
-      <h1> Lista de Presenca.: {/*Nome: { studentName } */}</h1>
+      <header>
+        <h1> Lista de Presenca.: </h1>
+        <div>
+          <strong>Claudio Nkumbula</strong>
+          
+          <img 
+            src="https://avatars.githubusercontent.com/u/25586893?v=4" 
+            alt="profile picture"
+          />
+
+        </div> 
+      </header>
+
 
 
 
@@ -41,7 +53,13 @@ export function Home() {
       </button>
 
       {
-        students.map(student => <Card name={student.name} time={student.time}/>)
+        students.map(student => (
+        <Card 
+          key={student.time}
+          name={student.name} 
+          time={student.time}
+        />
+        ))
       }
 
 
